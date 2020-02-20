@@ -1,0 +1,11 @@
+# exutable
+*.exe
+*.out
+
+# object & preprocessing
+*.o
+*.pch
+*.gch
+
+# IDE
+**/.vscode/**

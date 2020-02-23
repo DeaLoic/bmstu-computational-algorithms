@@ -19,6 +19,8 @@ public:
     Table(vector<vector<double> > tableVector);
 
     void Parse(std::string filename, int dimension = 2);
+    void Form(std::string filename, double (*func)(vector<double> args), vector<vector<double> > coordsOffset);
+
     void Print();
     double GetElementSourceCoords(vector<int> coords);
 

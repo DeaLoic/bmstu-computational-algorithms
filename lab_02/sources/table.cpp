@@ -51,6 +51,55 @@ void Table::Parse(string fileName, int dimension)
     in.close();
 }
 
+void Table::Form(std::string filename, double (*func)(vector<double> args), vector<vector<double> > coordsOffset)
+{
+    ofstream out;
+    double currentCoord, end, beg, step;
+    out.open(filename, ofstream::out);
+    for (int i = 0; i < coordsOffset.size(); i++)
+    {
+        beg = coordsOffset[i][0];
+        end = coordsOffset[i][1];
+        step = coordsOffset[i][2];
+        coordsOffset[i].clear();
+        while (beg <= end)
+        {
+            coordsOffset[i].push_back(beg);
+            out << beg << " ";
+            beg += step;
+        }
+        out << "\n";
+    }
+
+    int allCoords = 1;
+    for (int i = 0; i < coordsOffset.size(); i++)
+    {
+        allCoords *= coordsOffset[i].size();
+    }
+
+    vector<double> coordinates(coordsOffset.size());
+    int curDimensionSize = allCoords;
+	int subCycleIndex = 0;
+    for (int i = 0; i < allCoords; i++)
+    {
+        curDimensionSize = allCoords;
+		subCycleIndex = i;
+        for (int k = 0; k < coordsOffset.size(); k++)
+        {
+            curDimensionSize /= coordsOffset[k].size();
+            coordinates[k] = coordsOffset[k][subCycleIndex / curDimensionSize];
+			subCycleIndex %= curDimensionSize;
+        }
+
+        out << func(coordinates) << " ";
+        if (i % (allCoords /  coordsOffset[0].size()) == 0)
+        {
+            out << "\n";
+        }
+    }
+
+}
+
 void Table::Print()
 {
     for (int i = 0; i < tableVector.size(); i++)

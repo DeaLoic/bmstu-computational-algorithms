@@ -1,4 +1,4 @@
-all: lab_02.out
+all: lab_02.exe
 
-lab_02.out:
-	g++ main.cpp interpolate.cpp -o lab_02.out
+lab_02.exe:
+	g++ -Wall main.cpp interpolate.cpp table.cpp -o lab_02.exe

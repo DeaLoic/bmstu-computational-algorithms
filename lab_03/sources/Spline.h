@@ -24,6 +24,7 @@ private:
 public:
     Spline(PrettyTable table);
     double Solve(double x);
+    void PrintCoeffsC();
 };
 
 #endif

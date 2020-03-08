@@ -43,7 +43,7 @@ void PrettyTable::Form(string filename, double (*func)(double), vector<double> a
     {
         double currentX = 0;
         double currentY;
-        for (currentX = arguments[0]; currentX < arguments[1]; currentX += arguments[2])
+        for (currentX = arguments[0]; currentX <= arguments[1]; currentX += arguments[2])
         {
             try
             {

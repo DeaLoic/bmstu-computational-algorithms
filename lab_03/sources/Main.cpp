@@ -12,10 +12,11 @@ double FuncPrototype(double x)
 int main()
 {
     PrettyTable table;
-    table.Form(TABLE_FILE, FuncPrototype, vector<double>({ -5, 5, 0.1 }));
+    table.Form(TABLE_FILE, FuncPrototype, vector<double>({ -5, 5, 1 }));
     table.ReadPrettyTable(TABLE_FILE);
 
     Spline spline = Spline(table);
+    spline.PrintCoeffsC();
 
     double targetX;
     cout << "Input x: ";
@@ -24,7 +25,9 @@ int main()
     double y;
     y = spline.Solve(targetX);
 
-    cout << "\nResult: " << y << "\nExpected: " << FuncPrototype(targetX);
+    cout << "\nResult: " << y << "\nExpected: " << FuncPrototype(targetX) << "\n";
+
+    system("pause");
     
     return 0;
 }
